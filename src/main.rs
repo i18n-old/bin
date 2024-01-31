@@ -10,7 +10,7 @@ fn main() -> Result<()> {
     exit(0);
   }
 
-  let m = Command::new("").disable_version_flag(true)
+  let m = Command::new("i18n.site").disable_version_flag(true)
     // .arg(arg!([name] "Optional name to operate on"))
     // .arg(
     //   arg!(
