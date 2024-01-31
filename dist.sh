@@ -17,7 +17,7 @@ git pull
 
 if [ "$branch" != "main" ]; then
   git pull origin main
-  git merge origin/main
+  git merge main
 fi
 
 cargo build
