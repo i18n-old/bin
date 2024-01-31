@@ -1,8 +1,8 @@
 use aok::{Result, OK};
-use clap::{arg, command};
+use clap::{arg, Command};
 
 fn main() -> Result<()> {
-  let m = command!()
+  let m = Command::new("")
     .disable_version_flag(true)
     // .arg(arg!([name] "Optional name to operate on"))
     // .arg(
