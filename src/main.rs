@@ -1,21 +1,30 @@
-use clap::Parser;
+use aok::{Result, OK};
+use clap::{arg, command};
 
-#[derive(Parser, Debug)]
-#[command(version)]
-struct Args {
-  // /// Name of the person to greet
-  // #[arg(short, long)]
-  // name: String,
-  //
-  // /// Number of times to greet
-  // #[arg(short, long, default_value_t = 1)]
-  // count: u8,
-}
+fn main() -> Result<()> {
+  let m = command!()
+    .disable_version_flag(true)
+    // .arg(arg!([name] "Optional name to operate on"))
+    // .arg(
+    //   arg!(
+    //             -c --config <FILE> "Sets a custom config file"
+    //         )
+    //         // We don't have syntax yet for optional options, so manually calling `required`
+    //         .required(false)
+    //         .value_parser(value_parser!(PathBuf)),
+    // )
+    .arg(arg!(
+        -v --version
+    ))
+    // .subcommand(
+    //   Command::new("test")
+    //     .about("does testing things")
+    //     .arg(arg!(-l --list "lists test values").action(ArgAction::SetTrue)),
+    // )
+    .get_matches();
+  if m.get_one::<bool>("version") == Some(&true) {
+    println!("version");
+  }
 
-fn main() {
-  let _args = Args::parse();
-
-  // for _ in 0..args.count {
-  //   println!("Hello {}!", args.name)
-  // }
+  OK
 }
