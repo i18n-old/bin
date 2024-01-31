@@ -4,8 +4,13 @@ use aok::{Result, OK};
 use clap::{arg, crate_version, Command};
 
 fn main() -> Result<()> {
-  let m = Command::new("")
-    .disable_version_flag(true)
+  let arg_len = std::env::args().count();
+  if arg_len == 1 {
+    dbg!("todo");
+    exit(0);
+  }
+
+  let m = Command::new("").disable_version_flag(true)
     // .arg(arg!([name] "Optional name to operate on"))
     // .arg(
     //   arg!(
