@@ -8,7 +8,8 @@ set -ex
 
 source sh/conf.sh
 
-cargo build --release
+# cargo build --release
+
 meta=$(cargo metadata --format-version=1 --no-deps)
 ver=$(echo $meta | jq -r '.packages[0].version')
 
@@ -25,13 +26,16 @@ export name_ver=$name-$ver
 
 branch=$name_ver.$os-$arch$target_env
 
-cd $DIR/target/release
+CARGO_RELEASE=$DIR/target/release
+OUTPUT_DIR=$CARGO_RELEASE/$branch
 
-rm -rf $branch
-mkdir -p $branch
+rm -rf $OUTPUT_DIR
 
-binname=$(echo $meta | jq -r '.packages[0].name')
-mv $binname $branch/$name
+mkdir -p $OUTPUT_DIR
+
+cargo build -Z unstable-options --release --out-dir $OUTPUT_DIR
+
+cd $CARGO_RELEASE
 
 tarname=$branch.tar.bz2
 
