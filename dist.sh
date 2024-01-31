@@ -22,14 +22,15 @@ fi
 
 cargo build
 
-hash=$(git log --format=%H -2 main | tail -1)
+hash=$(git log --format=%H -1)
 
 cargo v patch -y
 
 set +x
-meta=$(cargo metadata --format-version=1)
+meta=$(cargo metadata --format-version=1 --no-deps)
 ver=$(echo $meta | jq -r '.packages[0].version')
 set -x
+
 logmd=log/$ver.md
 
 if ! [ -s $logmd ]; then

@@ -9,7 +9,7 @@ set -ex
 source sh/conf.sh
 
 cargo build --release
-meta=$(cargo metadata --format-version=1)
+meta=$(cargo metadata --format-version=1 --no-deps)
 ver=$(echo $meta | jq -r '.packages[0].version')
 
 cfg=$(rustc --print cfg)
