@@ -1,3 +1,5 @@
+use std::process::exit;
+
 use aok::{Result, OK};
 use clap::{arg, crate_version, Command};
 
@@ -24,6 +26,7 @@ fn main() -> Result<()> {
     .get_matches();
   if m.get_one::<bool>("version") == Some(&true) {
     println!(crate_version!());
+    exit(0);
   }
 
   OK
