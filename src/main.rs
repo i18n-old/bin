@@ -1,5 +1,5 @@
 use aok::{Result, OK};
-use clap::{arg, Command};
+use clap::{arg, crate_version, Command};
 
 fn main() -> Result<()> {
   let m = Command::new("")
@@ -23,7 +23,7 @@ fn main() -> Result<()> {
     // )
     .get_matches();
   if m.get_one::<bool>("version") == Some(&true) {
-    println!("version");
+    println!(crate_version!());
   }
 
   OK
