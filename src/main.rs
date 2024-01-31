@@ -24,7 +24,7 @@ fn main() -> Result<()> {
     //     .arg(arg!(-l --list "lists test values").action(ArgAction::SetTrue)),
     // )
     .get_matches();
-  if m.get_one::<bool>("version") == Some(&true) {
+  if m.get_one("version") == Some(&true) {
     println!(crate_version!());
     exit(0);
   }
