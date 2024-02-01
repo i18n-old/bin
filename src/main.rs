@@ -4,11 +4,12 @@ use std::process::exit;
 
 use aok::{Result, OK};
 use clap::{arg, crate_version, Command};
+use current_platform::CURRENT_PLATFORM;
 
 fn main() -> Result<()> {
   let arg_len = std::env::args().count();
   if arg_len == 1 {
-    println!("{}", "todo");
+    println!("{}", CURRENT_PLATFORM);
     exit(0);
   }
 
@@ -25,6 +26,9 @@ fn main() -> Result<()> {
     .arg(arg!(
         -v --version
     ))
+    .arg(arg!(
+        - -vV "more version info"
+    ))
     // .subcommand(
     //   Command::new("test")
     //     .about("does testing things")
@@ -33,6 +37,15 @@ fn main() -> Result<()> {
     .get_matches();
   if m.get_one("version") == Some(&true) {
     println!(crate_version!());
+    exit(0);
+  }
+  if m.get_one("vV") == Some(&true) {
+    println!(
+      r#"ver:{}
+build_target:{}"#,
+      crate_version!(),
+      CURRENT_PLATFORM
+    );
     exit(0);
   }
 
