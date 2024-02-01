@@ -45,7 +45,6 @@ jobs:
   ver:
     runs-on: ubuntu-latest
     needs: build
-    if: steps.build.outcome == 'success'
     steps:
       - uses: AnimMouse/setup-rclone@v1
       - uses: actions/checkout@v4
