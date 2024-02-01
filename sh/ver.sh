@@ -7,7 +7,7 @@ set -ex
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
 
 ver=$(cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version')
-branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' | awk -F' ' '{print $2}')
+branch=$(git symbolic-ref --short -q HEAD)
 
 cp -f git.config ../.git/config
 

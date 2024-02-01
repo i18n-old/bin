@@ -7,7 +7,7 @@ set -ex
 RED='\033[0;31m'
 NC='\033[0m'
 
-branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' | awk -F' ' '{print $2}')
+branch=$(git symbolic-ref --short -q HEAD)
 
 beginhash=$(git log --format=%H -1 main)
 
