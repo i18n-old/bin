@@ -46,6 +46,7 @@ git reset --soft $beginhash || true
 git add . && git commit -mv$ver || true
 
 if [ "$branch" != "main" ]; then
+  git push origin $branch -f
   git checkout main
   git merge $branch
 fi
@@ -58,6 +59,4 @@ wait
 
 if [ "$branch" != "main" ]; then
   git checkout $branch
-  git fetch origin $branch && git merge origin/$branch -m "merge" || true
-  git push
 fi
