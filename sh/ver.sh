@@ -4,6 +4,7 @@ DIR=$(realpath $0) && DIR=${DIR%/*}
 cd $DIR
 set -ex
 
+source conf.sh
 ver=$(cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version')
 branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' | awk -F' ' '{print $2}')
 

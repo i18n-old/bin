@@ -1,10 +1,11 @@
 v:
-  - xxai.eu.org/
+  - https://xxai.eu.org/i18n.site/bin/v
+  - https://raw.githubusercontent.com/i18n-site/bin/v/v
 
 tar:
   # github
-  - github.com/i18n-site/bin/releases/download/${name_ver}/
+  - https://github.com/i18n-site/bin/releases/download/${name_ver}/
   # fastgit
-  - download.fgit.cf/i18n-site/bin/releases/download/${name_ver}/
+  - https://download.fgit.cf/i18n-site/bin/releases/download/${name_ver}/
   # cloudflare
-  - xxai.eu.org/
+  - https://xxai.eu.org/
