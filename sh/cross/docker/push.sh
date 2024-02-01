@@ -12,6 +12,7 @@ TAG_LI=($(date +"%Y%m%d") latest)
 push() {
   target_li=$1
   for arch in ${target_li[@]}; do
+    arch=$arch-cross
     HUBNAME=$DOCKER_ORG/$arch
     for tag in ${TAG_LI[@]}; do
       docker tag ghcr.io/cross-rs/$arch:local $HUBNAME:$tag

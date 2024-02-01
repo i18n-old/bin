@@ -10,7 +10,7 @@ jobs:
     name: build
     strategy:
       matrix:
-        platform: [macos-latest,windows-latest,ubuntu-latest]
+        platform: [macos-latest,ubuntu-latest]
         # python-version: [3.9]
         # platform: [windows-latest]
         # platform: [macos-latest]
@@ -40,7 +40,7 @@ jobs:
         run: |
           cd sh
           ./initos.sh
-          ./zigbuild.sh
+          ./cross.sh
           ./bin.dist.sh
 
       # - name: cancel_if_failure

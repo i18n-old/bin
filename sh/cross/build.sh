@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-DIR=$(realpath $0) && DIR=${DIR%/*/*}
-cd $DIR
+DIR=$(realpath $0) && DIR=${DIR%/*}
+ROOT=${DIR%/*}
+cd $ROOT
 set -ex
 
 if ! command -v cross &>/dev/null; then
@@ -14,11 +15,9 @@ cs() {
 
 csbr() {
   for i in "$@"; do
-    cs build $i --out-dir target/bin/$i
+    cs build $i --out-dir target/$i/release
   done
 
 }
 
-cd $DIR
-
-csbr aarch64-apple-darwin x86_64-apple-darwin x86_64-unknown-linux-musl
+csbr aarch64-pc-windows-msvc

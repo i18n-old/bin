@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.55"
+version = "0.1.56"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"
@@ -27,7 +27,7 @@ codegen-units = 1
 overflow-checks = false
 panic = 'abort'
 debug-assertions = false
-# strip = true
+strip = true
 
 [profile.dev]
 split-debuginfo = "unpacked"
