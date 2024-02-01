@@ -17,6 +17,10 @@ jobs:
     runs-on: ${{ matrix.platform }}
     # https://docs.github.com/zh/actions/using-jobs/using-a-matrix-for-your-jobs#handling-failures
     steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+        if: github.runner_os == 'macOS'
       # - uses: GuillaumeFalourd/setup-rsync@v1.2
       - uses: AnimMouse/setup-rclone@v1
       - uses: actions/checkout@v4
