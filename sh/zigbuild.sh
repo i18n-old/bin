@@ -14,7 +14,7 @@ unameOut="$(uname -s)"
 target_list=$(rustup target list | awk '{print $1}')
 
 case "${unameOut}" in
-Linux*) TARGET_LI=$(echo $target_list | grep "linux-" | grep -E "i686|x86|arch64" | grep -E "[musl|gun]$") ;;
+Linux*) TARGET_LI=$(echo "$target_list" | grep "linux-" | grep -E "i686|x86|arch64" | grep -E "[musl|gun]$") ;;
 Darwin*) TARGET_LI=$(echo "$target_list" | grep "apple-" | grep -v "\-ios") ;;
 Windows*) TARGET_LI=$(echo "$target_list" | grep windows | grep msvc | grep -v "i586-" | awk '{print $1}') ;;
 esac
