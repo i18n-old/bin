@@ -10,7 +10,7 @@ jobs:
     name: build
     strategy:
       matrix:
-        platform: [macos-latest,ubuntu-latest]
+        platform: [macos-latest,ubuntu-latest,macos-latest-large]
         # python-version: [3.9]
         # platform: [windows-latest]
         # platform: [macos-latest]

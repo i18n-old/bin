@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.77"
+version = "0.1.78"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"

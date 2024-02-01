@@ -19,12 +19,14 @@ cs() {
   ./mv.sh $ver $1
 }
 
-# STATIC="$RUSTFLAGS" # -Ctarget-feature=+crt-static"
-# STATIC="$RUSTFLAGS -Ctarget-feature=+crt-static"
+# 这样无效,不知道为什么
+# STATIC="$RUSTFLAGS -C target-feature=+crt-static"
 # export CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
 # export CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
 
+# 不静态编译会提示缺少 vcruntime140.dll
 RUSTFLAGS="$RUSTFLAGS -C target-feature=+crt-static"
+
 WIN=(x86_64-pc-windows-msvc aarch64-pc-windows-msvc)
 
 for i in ${WIN[@]}; do
