@@ -5,6 +5,8 @@ cd $DIR
 
 set -ex
 
+source sh/RUSTFLAGS.sh
+
 meta=$(cargo metadata --format-version=1 --no-deps)
 installed=$(rustup target list --installed)
 ver=$(echo $meta | jq -r '.packages[0].version')
@@ -16,7 +18,7 @@ target_list=$(rustup target list | awk '{print $1}')
 case "${unameOut}" in
 Linux*) TARGET_LI=$(echo "$target_list" | grep "\-linux-" | grep -E "x86|aarch64" | grep -E "[musl|gun]$" | grep -v "i686-unknown-linux-musl") ;;
 Darwin*) TARGET_LI=$(echo "$target_list" | grep "\-apple-" | grep -v "\-ios") ;;
-MINGW*) TARGET_LI=$(echo "$target_list" | grep "\-windows-msvc" | grep -E -v "\d86") ;;
+MINGW*) TARGET_LI=(x86_64-pc-windows-msvc) ;;
 esac
 
 if ! command -v cargo-zigbuild &>/dev/null; then
@@ -28,7 +30,7 @@ BIN=$TARGET/bin
 rm -rf $BIN
 
 build_mv() {
-  cargo zigbuild -Z unstable-options --target $1 --release
+  cargo zigbuild $RUSTFLAGS --target $1
   name=$ver.$1
   out=$BIN/$name
   mkdir -p $out
