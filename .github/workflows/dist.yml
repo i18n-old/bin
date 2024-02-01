@@ -18,7 +18,7 @@ jobs:
     # https://docs.github.com/zh/actions/using-jobs/using-a-matrix-for-your-jobs#handling-failures
     steps:
       # - uses: GuillaumeFalourd/setup-rsync@v1.2
-      # - uses: AnimMouse/setup-rclone@v1
+      - uses: AnimMouse/setup-rclone@v1
       - uses: actions/checkout@v4
         with:
           lfs: true
