@@ -17,6 +17,6 @@ rm -rf $OUT
 
 mkdir -p $OUT
 
-find $TARGET/$arch/release -maxdepth 1 -type f -perm +u=x | while read file; do
+find $TARGET/$arch/release -maxdepth 1 -type f -perm 755 | while read file; do
   mv "$file" $OUT/
 done
