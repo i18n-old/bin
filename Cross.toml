@@ -1,0 +1,5 @@
+[target.aarch64-apple-darwin]
+image = "i18nsite/aarch64-apple-darwin-cross:latest"
+
+[target.x86_64-apple-darwin]
+image = "i18nsite/x86_64-apple-darwin-cross:latest"
