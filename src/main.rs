@@ -27,7 +27,7 @@ fn main() -> Result<()> {
         -v --version
     ))
     .arg(arg!(
-        - -vV "more version info"
+        - -vv "more version info"
     ))
     // .subcommand(
     //   Command::new("test")
@@ -39,7 +39,7 @@ fn main() -> Result<()> {
     println!(crate_version!());
     exit(0);
   }
-  if m.get_one("vV") == Some(&true) {
+  if m.get_one("vv") == Some(&true) {
     println!(
       r#"ver:{}
 build_target:{}"#,
