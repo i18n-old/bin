@@ -8,7 +8,7 @@ use clap::{arg, crate_version, Command};
 fn main() -> Result<()> {
   let arg_len = std::env::args().count();
   if arg_len == 1 {
-    dbg!("todo");
+    println!("{}", "todo");
     exit(0);
   }
 
