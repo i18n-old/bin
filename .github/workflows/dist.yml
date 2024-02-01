@@ -36,16 +36,24 @@ jobs:
             override: true
             # components: rustfmt, clippy
 
-      - name: build
+      - name: prepare
         shell: bash
         env:
           ENC_PASSWD: ${{ secrets.ENC_PASSWD }}
+        run: |
+          ./sh/initos.sh
+
+      - name: build
+        shell: bash
+        run: |
+          ./sh/cross.sh
+
+      - name: dist
+        shell: bash
+        env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cd sh
-          ./initos.sh
-          ./cross.sh
-          ./bin.dist.sh
+          ./sh/bin.dist.sh
 
       # - name: cancel_if_failure
       #   if: failure()
