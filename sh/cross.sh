@@ -7,8 +7,6 @@ set -ex
 
 source RUSTFLAGS.sh
 
-installed=$(rustup target list --installed)
-
 unameOut="$(uname -s)"
 
 target_list=$(rustup target list | awk '{print $1}')
@@ -34,7 +32,7 @@ build_mv() {
 }
 
 for target in ${TARGET_LI[@]}; do
-  (echo $installed | grep -q $target || rustup target add $target) && rustup update nightly
+  ./cross/target.sh $target
   build_mv $target
 done
 

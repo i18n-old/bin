@@ -11,12 +11,8 @@ if ! command -v cross &>/dev/null; then
   cargo install cross
 fi
 
-ver=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[0].version')
-
-# installed=$(rustup target list --installed)
-
 cs() {
-  # (echo $installed | grep -q $1 || rustup target add $1) && rustup update nightly
+  ./target.sh $1
   cross build --target $1 --release
   ./mv.sh $ver $1
 }
