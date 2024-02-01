@@ -19,10 +19,12 @@ cs() {
   ./mv.sh $ver $1
 }
 
-STATIC="$RUSTFLAGS -Ctarget-feature=+crt-static"
-CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
-CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
+# STATIC="$RUSTFLAGS" # -Ctarget-feature=+crt-static"
+# STATIC="$RUSTFLAGS -Ctarget-feature=+crt-static"
+# export CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
+# export CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
 
+RUSTFLAGS="$RUSTFLAGS -C target-feature=+crt-static"
 WIN=(x86_64-pc-windows-msvc aarch64-pc-windows-msvc)
 
 for i in ${WIN[@]}; do

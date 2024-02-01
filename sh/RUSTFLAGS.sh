@@ -1,1 +1,1 @@
-export RUSTFLAGS='--cfg reqwest_unstable -C target-feature=+aes -Z unstable-options'
+export RUSTFLAGS='--cfg reqwest_unstable -C target-feature=+aes'
