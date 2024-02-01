@@ -27,3 +27,6 @@ if ! [ -f "$HOME/.config/rclone/rclone.conf" ]; then
     cp -rT conf $HOME
   fi
 fi
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/*

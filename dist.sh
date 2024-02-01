@@ -43,8 +43,6 @@ fi
 
 git reset --soft $beginhash || true
 
-echo $(($(cat .v) + 1)) >.v
-
 git add . && git commit -mv$ver || true
 
 if [ "$branch" != "main" ]; then
