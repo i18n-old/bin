@@ -30,7 +30,7 @@ BIN=$TARGET/bin
 rm -rf $BIN
 
 build_mv() {
-  cargo zigbuild $RUSTFLAGS --target $1
+  cargo zigbuild --target $1
   name=$ver.$1
   out=$BIN/$name
   mkdir -p $out
