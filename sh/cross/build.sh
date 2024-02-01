@@ -13,17 +13,20 @@ fi
 
 ver=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[0].version')
 
+# installed=$(rustup target list --installed)
+
 cs() {
+  # (echo $installed | grep -q $1 || rustup target add $1) && rustup update nightly
   cross build --target $1 --release
   ./mv.sh $ver $1
 }
 
-STATIC=
+STATIC="$RUSTFLAGS -Ctarget-feature=+crt-static"
+CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
+CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS=$STATIC
 
-# CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="$RUSTFLAGS $STATIC"
+WIN=(x86_64-pc-windows-msvc aarch64-pc-windows-msvc)
 
-CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS=CARGO_TARGET_AARCH64_PC_WINDOWS_MSVC_RUSTFLAGS="$RUSTFLAGS -Ctarget-feature=+crt-static"
-
-for i in ${x86_64-pc-windows-msvc aarch64-pc-windows-msvc}; do
-  cs build $i
+for i in ${WIN[@]}; do
+  cs $i
 done
