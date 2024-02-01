@@ -15,7 +15,8 @@ target_list=$(rustup target list | awk '{print $1}')
 
 case "${unameOut}" in
 Linux)
-  ./cross/build.sh &
+  docker pull i18nsite/x86_64-pc-windows-msvc-cross &
+  docker pull i18nsite/aarch64-pc-windows-msvc-cross &
   TARGET_LI=$(echo "$target_list" | grep "\-linux-" | grep -E "x86|aarch64" | grep -E "[musl|gun]$" | grep -v "i686-unknown-linux-musl")
   ;;
 Darwin) TARGET_LI=$(echo "$target_list" | grep "\-apple-" | grep -v "\-ios") ;;
@@ -38,6 +39,6 @@ for target in ${TARGET_LI[@]}; do
 done
 
 wait
-# if [ "$unameOut" == "Darwin" ]; then
-#   build_mv universal2-apple-darwin
-# fi
+if [ "$unameOut" == "Linux" ]; then
+  ./cross/build.sh
+fi
