@@ -39,7 +39,7 @@ jobs:
           ./sh/initos.sh
           ./sh/dist.sh
 
-      - name: cancelling_if_failure
+      - name: cancel_if_failure
         if: failure()
         uses: andymckay/cancel-action@0.4
   ver:

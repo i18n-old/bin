@@ -54,8 +54,9 @@ fi
 
 git tag -d v$ver
 git tag v$ver
-git push origin main
-git push origin v$ver
+git push origin main &
+git push origin v$ver &
+wait
 
 if [ "$branch" != "main" ]; then
   git checkout $branch
