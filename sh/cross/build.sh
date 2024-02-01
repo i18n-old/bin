@@ -11,6 +11,8 @@ if ! command -v cross &>/dev/null; then
   cargo install cross
 fi
 
+ver=$(cargo metadata --format-version=1 | jq -r '.packages[0].version')
+
 cs() {
   ./target.sh $1
   cross build --target $1 --release
