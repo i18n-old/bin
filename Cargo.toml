@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.58"
+version = "0.1.59"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"
@@ -33,4 +33,4 @@ strip = true
 split-debuginfo = "unpacked"
 
 [target.'cfg(target_arch="windows")']
-rustflags = ["-Ctarget-feature=+crt-static"]
+rustflags = ["-C", "target-feature=+crt-static"]
