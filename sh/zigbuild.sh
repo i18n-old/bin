@@ -14,9 +14,9 @@ unameOut="$(uname -s)"
 target_list=$(rustup target list | awk '{print $1}')
 
 case "${unameOut}" in
-Linux*) TARGET_LI=$(echo "$target_list" | grep "linux-" | grep -E "i686|x86|arch64" | grep -E "[musl|gun]$") ;;
+Linux*) TARGET_LI=$(echo "$target_list" | grep "linux-" | grep -E "x86|aarch64" | grep -E "[musl|gun]$" | grep -v "i686-unknown-linux-musl") ;;
 Darwin*) TARGET_LI=$(echo "$target_list" | grep "apple-" | grep -v "\-ios") ;;
-MINGW*) TARGET_LI=$(echo "$target_list" | grep windows | grep msvc | grep -v "i586-" | awk '{print $1}') ;;
+MINGW*) TARGET_LI=$(echo "$target_list" | grep windows | grep msvc | grep -v "i586-") ;;
 esac
 
 if ! command -v cargo-zigbuild &>/dev/null; then
@@ -40,8 +40,7 @@ build_mv() {
 }
 
 for target in ${TARGET_LI[@]}; do
-  echo $installed | grep -q $target || rustup target add $target
-  rustup update nightly
+  (echo $installed | grep -q $target || rustup target add $target) && rustup update nightly
   build_mv $target
 done
 
