@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
     paths:
-      - 'sh/cross_docker_image.sh'
+      - 'sh/cross/docker/*'
       - '.github/workflows/docker.yml'
   workflow_dispatch:
   schedule:
