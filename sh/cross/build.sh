@@ -15,7 +15,7 @@ ver=$(cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version'
 
 cs() {
   ./target.sh $1
-  cross build --target $1 --release
+  cross build --release -Z build-std=std,panic_abort --target $1
   ./mv.sh $ver $1
 }
 
