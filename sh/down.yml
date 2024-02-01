@@ -1,0 +1,10 @@
+v:
+  - xxai.eu.org/
+
+tar:
+  # github
+  - github.com/i18n-site/bin/releases/download/${name_ver}/
+  # fastgit
+  - download.fgit.cf/i18n-site/bin/releases/download/${name_ver}/
+  # cloudflare
+  - xxai.eu.org/
