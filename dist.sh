@@ -59,6 +59,6 @@ git push origin v$ver
 
 if [ "$branch" != "main" ]; then
   git checkout $branch
-  git merge main
+  git fetch origin $branch && git merge origin/$branch -m "merge" || true
   git push
 fi
