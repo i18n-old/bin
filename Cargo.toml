@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.65"
+version = "0.1.66"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"
@@ -32,6 +32,9 @@ strip = true
 
 [profile.dev]
 split-debuginfo = "unpacked"
+
+[target.'cfg(all(target_os = "macos", target_arch="aarch64"))']
+strip = false
 
 [target.'cfg(target_env = "msvc")']
 rustflags = ["-C", "target-feature=+crt-static"]
