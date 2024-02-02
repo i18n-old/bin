@@ -30,7 +30,6 @@ rustup component add rust-src --toolchain nightly
 
 for target in ${TARGET_LI[@]}; do
   ./cross/target.sh $target
-  build_mv $target
   cargo $build -Z build-std=std,panic_abort --release --target $target &
 done
 
