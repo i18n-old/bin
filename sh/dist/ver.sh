@@ -32,26 +32,25 @@ git init
 
 cp -f $DIR/conf/git.config .git/config
 
-echo $VER >v
+mkdir -p _
+echo $VER >_/v
 cd $VER
 
 echo $meta | jq -r '"wget -c "+.assets[].browser_download_url+"&"' | bash
 wait
-cd ..
 
-echo $(pwd)
+cd $DIST
 set +x
 # 不要暴露 s3 地址避免被盗刷
-$DIR/rcp.sh $VER &
-$DIR/rcp.sh v &
+find . -mindepth 1 -maxdepth 1 -exec basename {} \; | grep -v "^\." | xargs -P 4 -I {} ./rcp.sh {}
 set -x
 
 wait
 
-git checkout -b master
+git checkout -b main
 git add .
 git commit -m$VER
-git push -f --set-upstream origin master
+git push -f --set-upstream origin main
 
 cd ..
 
