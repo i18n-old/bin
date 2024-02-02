@@ -27,7 +27,7 @@ cd $VER
 
 set +x
 # 不要暴露 s3 地址避免被盗刷
-find . -mindepth 1 -maxdepth 1 -exec basename {} \; | grep -v "^\." | xargs -P 4 -I {} ./rcp.sh {}
+find . -mindepth 1 -maxdepth 1 -exec basename {} \; | grep -v "^\." | xargs -P 4 -I {} $DIR/rcp.sh {}
 set -x
 
 git checkout -b main
