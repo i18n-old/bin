@@ -42,7 +42,10 @@ wait
 
 build="cargo $build -Z build-std=std,panic_abort --release --target"
 
-echo $TARGET_LI | xargs -n1 -P$(nproc) $build
+# echo $TARGET_LI | xargs -n1 -P$(nproc) $build
+for target in ${TARGET_LI[@]}; do
+  $build $target
+done
 
 if [[ "$unameOut" == MINGW* ]]; then
   wait
