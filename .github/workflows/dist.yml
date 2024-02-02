@@ -35,6 +35,7 @@ jobs:
         with:
             toolchain: nightly
             override: true
+            components: rust-src
             # components: rustfmt, clippy
 
       - name: prepare
