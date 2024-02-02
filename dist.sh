@@ -59,4 +59,5 @@ wait
 
 if [ "$branch" != "main" ]; then
   git checkout $branch
+  git merge main
 fi
