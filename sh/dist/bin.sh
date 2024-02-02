@@ -17,7 +17,7 @@ dist() {
 }
 
 find . -mindepth 1 -maxdepth 1 -type d | while read file; do
-  tarname=$file.tar.xz
+  tarname=$(basename $file).tar.xz
   tar -cJvf $tarname $file
   b3sum --raw $tarname >$tarname.b3
   dist $tarname
