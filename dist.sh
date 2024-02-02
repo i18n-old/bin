@@ -25,13 +25,9 @@ cargo build
 hash=$(git log --format=%H -1)
 
 cargo v patch -y
+. sh/dist/VER.sh
 
-set +x
-meta=$(cargo metadata --format-version=1 --no-deps)
-ver=$(echo $meta | jq -r '.packages[0].version')
-set -x
-
-logmd=log/$ver.md
+logmd=log/$VER.md
 
 if ! [ -s $logmd ]; then
   echo -e "${RED}miss changelog : $logmd$NC"
@@ -43,7 +39,7 @@ fi
 
 git reset --soft $beginhash || true
 
-git add . && git commit -mv$ver || true
+git add . && git commit -mv$VER || true
 
 if [ "$branch" != "main" ]; then
   git push origin $branch -f
@@ -51,10 +47,10 @@ if [ "$branch" != "main" ]; then
   git merge $branch
 fi
 
-git tag -d v$ver
-git tag v$ver
+git tag -d v$VER
+git tag v$VER
 git push origin main &
-git push origin v$ver &
+git push origin v$VER &
 wait
 
 if [ "$branch" != "main" ]; then

@@ -5,18 +5,17 @@ cd $DIR
 ROOT=${DIR%/*}
 set -ex
 
-source ../RUSTFLAGS.sh
+. ../RUSTFLAGS.sh
+. $ROOT/VER.sh
 
 if ! command -v cross &>/dev/null; then
   cargo install cross
 fi
 
-ver=$(cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version')
-
 cs() {
   ./target.sh $1
   cross build --release -Z build-std=std,panic_abort --target $1
-  ./mv.sh $ver $1
+  ./mv.sh $VER $1
 }
 
 # 这样无效,不知道为什么

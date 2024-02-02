@@ -25,13 +25,12 @@ Darwin)
   ;;
 esac
 
-ver=$(cargo metadata --format-version=1 --no-deps | jq -r '.packages[0].version')
-
+. $DIR/../dist/VER.sh
 rustup component add rust-src --toolchain nightly
 
 build_mv() {
   cargo $build -Z build-std=std,panic_abort --release --target $1
-  $DIR/cross/mv.sh $ver $1
+  $DIR/cross/mv.sh $VER $1
 }
 
 for target in ${TARGET_LI[@]}; do

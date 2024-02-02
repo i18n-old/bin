@@ -9,7 +9,7 @@ $DIR/init.sh
 BIN=$ROOT/target/bin
 cd $BIN
 
-export ver=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' -r)
+. $DIR/VER.sh
 
 dist() {
   $DIR/gh.sh $BIN/$1
