@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
-DIR=$(realpath $0) && DIR=${DIR%/*/*}
-cd $DIR
+DIR=$(realpath $0) && DIR=${DIR%/*}
+ROOT=${DIR/*/*}
 set -ex
 
-DIRSH=$DIR/sh
+$DIR/init.sh
 
-$DIRSH/initdist.sh
-
-cd $DIR/target/bin
+cd $ROOT/target/bin
 
 export ver=v$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' -r)
 
 dist() {
-  $DIRSH/rcp.sh $@ $ver/
-  $DIRSH/dist.gh.sh $@
+  $DIR/rcp.sh $@ $ver/
+  $DIR/gh.sh $@
 }
 
 find . -mindepth 1 -maxdepth 1 -type d | while read file; do

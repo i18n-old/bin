@@ -43,7 +43,7 @@ jobs:
         env:
           ENC_PASSWD: ${{ secrets.ENC_PASSWD }}
         run: |
-          ./sh/initos.sh
+          ./sh/dist/os.sh
 
       - name: build
         shell: bash
@@ -55,7 +55,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          ./sh/bin.dist.sh
+          ./sh/dist/bin.sh
 
       # - name: cancel_if_failure
       #   if: failure()
@@ -74,8 +74,9 @@ jobs:
         env:
           ENC_PASSWD: ${{ secrets.ENC_PASSWD }}
         run: |
-          ./sh/initos.sh
-          ./sh/ver.sh
+          cd sh/dist
+          ./os.sh
+          ./ver.sh
 
       # with:
       #   fetch-depth: 1

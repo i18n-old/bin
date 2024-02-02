@@ -15,13 +15,13 @@ cd /tmp
 echo $ver >v
 $DIR/rcp.sh v
 
-cd $(dirname $DIR)
+cd $DIR/../..
 
 rm -rf dist
 mkdir -p dist
 cd dist
 git init
-cp -f $DIR/dist/git.config .git/config
+cp -f $DIR/git.config .git/config
 
 # git branch -D v || true
 # git switch --orphan v
