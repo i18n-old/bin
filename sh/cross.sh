@@ -44,7 +44,7 @@ build="cargo $build -Z build-std=std,panic_abort --release --target"
 
 echo $TARGET_LI | xargs -n1 -P$(nproc) $build
 
-if [ "$unameOut" == "MINGW*" ]; then
+if [[ "$unameOut" == MINGW* ]]; then
   wait
   target=aarch64-pc-windows-msvc
   TARGET_LI="$TARGET_LI $target"
