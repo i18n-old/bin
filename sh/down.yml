@@ -1,18 +1,8 @@
-v:
-  https:
-    - raw.githubusercontent.com/i18n-site/bin.dist/master
-    - atomgit.com/i18n-site/bin.dist/raw/master
-    - cdn.jsdelivr.net/gh/i18n-site/bin.dist
-    - xxai.eu.org/i18n.site/bin
+- raw.githubusercontent.com/i18n-site/bin.dist/master
+- atomgit.com/i18n-site/bin.dist/raw/master
+- cdn.jsdelivr.net/gh/i18n-site/bin.dist
+- xxai.eu.org/i18n.site/bin
+- https://github.com/i18n-site/bin/releases/download/v
+- github.com/i18n-site/bin/releases/download/v
+- download.fgit.cf/i18n-site/bin/releases/download/v
 
-tar:
-  https:
-    - https://github.com/i18n-site/bin/releases/download/v
-    # github
-    - github.com/i18n-site/bin/releases/download/v
-    # fastgit
-    - download.fgit.cf/i18n-site/bin/releases/download/v
-
-#  ver/0.1.102.aarch64-apple-darwin.tar.xz
-# -/v'
-# v+101.2/
