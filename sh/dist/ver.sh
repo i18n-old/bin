@@ -36,7 +36,7 @@ mkdir -p _
 echo $VER >_/v
 cd $VER
 
-echo $meta | jq -r '"wget -c "+.assets[].browser_download_url+"&"' | bash
+echo $meta | jq -r '"wget --retry-connrefused --waitretry=9 --read-timeout=30 --timeout=15 -t 999 -c "+.assets[].browser_download_url+"&"' | bash
 wait
 
 cd $DIST
