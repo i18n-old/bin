@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR=$(realpath $0) && DIR=${DIR%/*}
-ROOT=${DIR/*/*}
+ROOT=${DIR%/*/*}
 set -ex
 
 $DIR/init.sh
