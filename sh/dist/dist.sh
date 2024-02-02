@@ -17,13 +17,13 @@ cd $DIST_VER
 gh release download $VER
 
 cd $DIST
+mkdir -p _
+echo $VER >_/v
+
 git init
 
 cp -f $DIR/conf/git.config .git/config
 git checkout -b main
-
-mkdir -p _
-echo $VER >_/v
 
 # 不要暴露 s3 地址避免被盗刷
 find . -mindepth 1 -maxdepth 1 \

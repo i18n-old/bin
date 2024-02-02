@@ -7,12 +7,12 @@ set -ex
 
 source RUSTFLAGS.sh
 
+rustup component add rust-src --toolchain nightly &
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
 Linux)
   build="zigbuild"
-  docker pull i18nsite/x86_64-pc-windows-msvc-cross &
-  docker pull i18nsite/aarch64-pc-windows-msvc-cross &
   if ! command -v cargo-zigbuild &>/dev/null; then
     cargo install cargo-zigbuild
   fi
@@ -25,18 +25,24 @@ Darwin)
 esac
 
 . $DIR/dist/VER.sh
-rustup component add rust-src --toolchain nightly
 
 for target in ${TARGET_LI[@]}; do
-  ./cross/target.sh $target
-  cargo $build -Z build-std=std,panic_abort --release --target $target
+  ./cross/target.sh $target &
 done
 
 wait
 
+if [ "$unameOut" == "Linux" ]; then
+  docker pull i18nsite/x86_64-pc-windows-msvc-cross &
+  docker pull i18nsite/aarch64-pc-windows-msvc-cross &
+fi
+
+echo $TARGET_LI | xargs -n1 -P$(nproc) cargo $build -Z build-std=std,panic_abort --release --target
+
 for target in ${TARGET_LI[@]}; do
   $DIR/cross/mv.sh $VER $target
 done
+
 if [ "$unameOut" == "Linux" ]; then
   ./cross/build.sh
 fi
