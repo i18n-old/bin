@@ -10,7 +10,7 @@ bundle/
 node_modules
 pnpm-lock.yaml      
 target/
-dist/
+/dist/
 sh/conf/
 id_ed25519
 *.tar.zstd

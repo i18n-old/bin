@@ -3,9 +3,5 @@
 set -ex
 
 for i in ${S3[@]}; do
-  for fp in "$@"; do
-    rclone copy $fp $i &
-  done
+  rclone copy $1 $i/$2
 done
-
-wait

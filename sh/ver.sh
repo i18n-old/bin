@@ -17,11 +17,17 @@ $DIR/rcp.sh v
 
 cd $(dirname $DIR)
 
-git branch -D v || true
-git switch --orphan v
-rm -rf *
-echo $ver >v
-git add .
-git commit -m$ver
-git push --set-upstream origin v -f
-git checkout $branch
+rm -rf dist
+mkdir -p dist
+cd dist
+git init
+cp -f $DIR/dist/git.config .git/config
+
+# git branch -D v || true
+# git switch --orphan v
+# rm -rf *
+# echo $ver >v
+# git add .
+# git commit -m$ver
+# git push --set-upstream origin v -f
+# git checkout $branch

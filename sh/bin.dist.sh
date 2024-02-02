@@ -13,7 +13,7 @@ cd $DIR/target/bin
 export ver=v$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' -r)
 
 dist() {
-  $DIRSH/rcp.sh $@
+  $DIRSH/rcp.sh $@ $ver/
   $DIRSH/dist.gh.sh $@
 }
 
