@@ -12,8 +12,8 @@ build="build" # -Z unstable-options
 unameOut="$(uname -s)"
 case "${unameOut}" in
 MINGW*)
+  choco install activeperl nasm &
   TARGET_LI=$(rustc -vV | awk '/host/ { print $2 }')
-  exit 0
   ;;
 Linux)
   build="zigbuild"
@@ -45,9 +45,9 @@ build="cargo $build -Z build-std=std,panic_abort --release --target"
 echo $TARGET_LI | xargs -n1 -P$(nproc) $build
 
 if [ "$unameOut" == "MINGW*" ]; then
+  wait
   target=aarch64-pc-windows-msvc
   TARGET_LI="$TARGET_LI $target"
-  choco install activeperl nasm
   # Get Visual Studio installation directory
   VSINSTALLDIR=$(vswhere.exe -latest -requires Microsoft.VisualStudio.Component.VC.Llvm.Clang -property installationPath)
   VCINSTALLDIR=$VSINSTALLDIR/VC
