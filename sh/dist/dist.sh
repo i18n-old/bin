@@ -18,9 +18,12 @@ gh release download $VER
 
 cd $DIST
 mkdir -p _
-echo $VER >_/v
+
+# -n 不输出换行
+echo -n $VER >_/v
 
 gh release delete-asset _ v || gh release create _ --notes . || true
+# 必须在 git init 之前 upload,不然会没法 release
 gh release upload _ _/v
 git init
 
