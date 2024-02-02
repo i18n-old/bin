@@ -10,7 +10,7 @@ export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
 github_org_user() {
   local url=$1
   if [[ $url == *"https://"* ]]; then
-    echo $(echo $url | sed -r 's#https://github\.com/(.*).git#\1#')
+    echo $(echo $url | awk -F"/" '{uo=$4"/"$5;print uo}')
   else
     echo $(echo $url | sed -r 's#git@github\.com:(.*)\.git#\1#')
   fi
