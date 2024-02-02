@@ -34,7 +34,5 @@ git add .
 git commit -m$VER
 git push -f --set-upstream origin main
 
-cd ..
-
 gh release delete-asset _ v || gh release create _ --notes . || true
-gh release upload _/v _/v
+gh release upload _ _/v
