@@ -46,6 +46,9 @@ set -x
 
 wait
 
+gh release delete-asset v v || gh release create v || true
+gh release upload v v
+
 git add .
 git commit -m$ver
 git push -f
