@@ -3,29 +3,46 @@
 DIR=$(realpath $0) && DIR=${DIR%/*}
 cd $DIR
 source conf/S3.sh
-set -e
+set -ex
 
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
 
-gitsrc=$(git remote -v | awk '{print $2}' | grep github.com)
+github_org_user() {
+  local url=$1
+  if [[ $url == *"https://"* ]]; then
+    echo $(echo $url | sed -r 's#https://github\.com/(.*).git#\1#')
+  else
+    echo $(echo $url | sed -r 's#git@github\.com:(.*)\.git#\1#')
+  fi
+}
 
-ver=$(curl -s "https://api.github.com/repos/i18n-site/bin/releases/latest" | jq -r '.tag_name')
-branch=$(git symbolic-ref --short -q HEAD || echo main)
+ghou=$(github_org_user $(git remote -v | awk '{print $2}' | grep github.com))
 
-cp -f git.config ../.git/config
+meta=$(curl -s "https://api.github.com/repos/$ghou/releases/latest")
+
+VER=$(echo $meta | jq -r '.tag_name' | cut -d'v' -f2-)
 
 DIST=${DIR%/*/*}/dist
-
+DIST_VER=$DIST/$VER
 rm -rf $DIST
-mkdir -p $DIST
+mkdir -p $DIST_VER
 cd $DIST
 
 git init
-cp -f $DIR/git.config .git/config
 
-echo $ver >v
-$DIR/rcp.sh $DIST/v
-rclone copy $S3/$ver $ver
+cp -f $DIR/conf/git.config .git/config
+
+cd $VER
+
+echo $meta | jq -r '"wget "+.assets[].browser_download_url' | bash
+cd ..
+
+set +x
+# 不要暴露 s3 地址避免被盗刷
+$DIR/rcp.sh $DIST_VER
+$DIR/rcp.sh v
+set -x
+
 git add .
 git commit -m$ver
-git push origin main -f
+git push -f
