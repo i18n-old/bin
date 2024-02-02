@@ -35,20 +35,25 @@ cp -f $DIR/conf/git.config .git/config
 echo $VER >v
 cd $VER
 
-echo $meta | jq -r '"wget "+.assets[].browser_download_url' | bash
+echo $meta | jq -r '"wget -c "+.assets[].browser_download_url+"&"' | bash
+wait
 cd ..
 
-set +x
+echo $(pwd)
+# set +x
 # 不要暴露 s3 地址避免被盗刷
-$DIR/rcp.sh $VER &
-$DIR/rcp.sh v &
+$DIR/rcp.sh $VER
+$DIR/rcp.sh v
 set -x
 
-wait
+# wait
+
+git checkout -b master
+git add .
+git commit -m$VER
+git push -f --set-upstream origin master
+
+cd ..
 
 gh release delete-asset v v || gh release create v || true
 gh release upload v v
-
-git add .
-git commit -m$ver
-git push -f
