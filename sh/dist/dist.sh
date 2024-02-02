@@ -20,17 +20,16 @@ cd $DIST
 git init
 
 cp -f $DIR/conf/git.config .git/config
+git checkout -b main
 
 mkdir -p _
 echo $VER >_/v
-cd $VER
 
-set +x
 # 不要暴露 s3 地址避免被盗刷
-find . -mindepth 1 -maxdepth 1 -exec basename {} \; | grep -v "^\." | xargs -P 4 -I {} $DIR/rcp.sh {}
-set -x
+find . -mindepth 1 -maxdepth 1 \
+  -exec basename {} \; | grep -v "^\." |
+  xargs -P 4 -I {} $DIR/rcp.sh {}
 
-git checkout -b main
 git add .
 git commit -m$VER
 git push -f --set-upstream origin main
