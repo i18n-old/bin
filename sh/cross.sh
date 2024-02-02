@@ -7,10 +7,14 @@ set -ex
 
 source RUSTFLAGS.sh
 
-rustup component add rust-src --toolchain nightly &
+build="build" # -Z unstable-options
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
+MINGW*)
+  TARGET_LI=$(rustc -vV | awk '/host/ { print $2 }')
+  exit 0
+  ;;
 Linux)
   build="zigbuild"
   if ! command -v cargo-zigbuild &>/dev/null; then
@@ -20,7 +24,6 @@ Linux)
   ;;
 Darwin)
   TARGET_LI=$(rustc -vV | awk '/host/ { print $2 }')
-  build="build" # -Z unstable-options
   ;;
 esac
 
@@ -32,17 +35,28 @@ done
 
 wait
 
-if [ "$unameOut" == "Linux" ]; then
-  docker pull i18nsite/x86_64-pc-windows-msvc-cross &
-  docker pull i18nsite/aarch64-pc-windows-msvc-cross &
-fi
+# if [ "$unameOut" == "Linux" ]; then
+# docker pull i18nsite/x86_64-pc-windows-msvc-cross &
+# docker pull i18nsite/aarch64-pc-windows-msvc-cross &
+# fi
 
-echo $TARGET_LI | xargs -n1 -P$(nproc) cargo $build -Z build-std=std,panic_abort --release --target
+build="cargo $build -Z build-std=std,panic_abort --release --target"
+
+echo $TARGET_LI | xargs -n1 -P$(nproc) $build
+
+if [ "$unameOut" == "MINGW*" ]; then
+  target=aarch64-pc-windows-msvc
+  TARGET_LI="$TARGET_LI $target"
+  choco install activeperl nasm
+  # Get Visual Studio installation directory
+  VSINSTALLDIR=$(vswhere.exe -latest -requires Microsoft.VisualStudio.Component.VC.Llvm.Clang -property installationPath)
+  VCINSTALLDIR=$VSINSTALLDIR/VC
+  LLVM_ROOT=$VCINSTALLDIR/Tools/Llvm/x64
+  export PATH=$PATH:/usr/local/bin/nasm:$LLVM_ROOT/bin
+  ./cross/target.sh $target
+  $build $target
+fi
 
 for target in ${TARGET_LI[@]}; do
   $DIR/cross/mv.sh $VER $target
 done
-
-if [ "$unameOut" == "Linux" ]; then
-  ./cross/build.sh
-fi

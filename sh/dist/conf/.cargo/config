@@ -1,0 +1,4 @@
+[target.'cfg(any(target_env = "msvc", target_env = "musl")']
+rustflags = ["-Ctarget-feature=+crt-static"]
+
+

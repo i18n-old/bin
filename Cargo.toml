@@ -3,7 +3,7 @@ workspace = { members = ["bgu"] }
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.129"
+version = "0.1.130"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"
@@ -36,3 +36,6 @@ strip = true
 
 [profile.dev]
 split-debuginfo = "unpacked"
+
+[patch.crates-io]
+ring = { git = "https://github.com/sj6219/ring.git", branch = "0.16.20_alpha" }

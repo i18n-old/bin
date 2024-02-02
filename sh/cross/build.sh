@@ -26,7 +26,7 @@ cs() {
 # 不静态编译会提示缺少 vcruntime140.dll
 RUSTFLAGS="$RUSTFLAGS -C target-feature=+crt-static"
 
-WIN=(x86_64-pc-windows-msvc aarch64-pc-windows-msvc)
+WIN=(aarch64-pc-windows-msvc x86_64-pc-windows-msvc)
 
 for i in ${WIN[@]}; do
   cs $i
