@@ -24,6 +24,10 @@ cargo build
 
 hash=$(git log --format=%H -1)
 
+if ! command -v cargo-v &>/dev/null; then
+  cargo install cargo-v
+fi
+
 cargo v patch -y
 . sh/dist/VER.sh
 

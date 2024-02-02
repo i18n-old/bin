@@ -8,7 +8,6 @@ set -ex
 source RUSTFLAGS.sh
 
 unameOut="$(uname -s)"
-
 case "${unameOut}" in
 Linux)
   build="zigbuild"
@@ -30,7 +29,7 @@ rustup component add rust-src --toolchain nightly
 
 for target in ${TARGET_LI[@]}; do
   ./cross/target.sh $target
-  cargo $build -Z build-std=std,panic_abort --release --target $target &
+  cargo $build -Z build-std=std,panic_abort --release --target $target
 done
 
 wait
@@ -38,7 +37,6 @@ wait
 for target in ${TARGET_LI[@]}; do
   $DIR/cross/mv.sh $VER $target
 done
-
 if [ "$unameOut" == "Linux" ]; then
   ./cross/build.sh
 fi
