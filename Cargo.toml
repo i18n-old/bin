@@ -3,7 +3,7 @@ workspace = { members = ["bgu"] }
 [package]
 edition = "2021"
 name = "i18"
-version = "0.1.132"
+version = "0.1.133"
 license = "Apache-2.0"
 repository = "https://github.com/i18n-site/bin.git"
 homepage = "https://github.com/i18n-site/bin"
