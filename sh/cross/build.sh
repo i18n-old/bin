@@ -6,7 +6,7 @@ ROOT=${DIR%/*}
 set -ex
 
 . ../RUSTFLAGS.sh
-. $ROOT/VER.sh
+. ../dist/VER.sh
 
 if ! command -v cross &>/dev/null; then
   cargo install cross
