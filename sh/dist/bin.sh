@@ -9,7 +9,7 @@ $DIR/init.sh
 BIN=$ROOT/target/bin
 cd $BIN
 
-export ver=v$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' -r)
+export ver=$(cargo metadata --format-version=1 --no-deps | jq '.packages[0].version' -r)
 
 dist() {
   $DIR/rcp.sh $BIN/$1 $ver/

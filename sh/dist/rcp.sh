@@ -3,10 +3,8 @@
 DIR=$(realpath $0) && DIR=${DIR%/*}
 cd $DIR
 
-set -ex
+set -e
 
-source conf.sh
+source conf/S3.sh
 
-for i in ${S3[@]}; do
-  rclone copy $1 $i/$2
-done
+rclone copy $1 $S3/$2
