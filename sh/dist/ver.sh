@@ -40,13 +40,13 @@ wait
 cd ..
 
 echo $(pwd)
-# set +x
+set +x
 # 不要暴露 s3 地址避免被盗刷
-$DIR/rcp.sh $VER
-$DIR/rcp.sh v
+$DIR/rcp.sh $VER &
+$DIR/rcp.sh v &
 set -x
 
-# wait
+wait
 
 git checkout -b master
 git add .
