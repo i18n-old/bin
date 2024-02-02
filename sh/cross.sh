@@ -25,7 +25,7 @@ Darwin)
   ;;
 esac
 
-. $DIR/../dist/VER.sh
+. $DIR/dist/VER.sh
 rustup component add rust-src --toolchain nightly
 
 build_mv() {
