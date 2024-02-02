@@ -54,5 +54,5 @@ git push -f --set-upstream origin main
 
 cd ..
 
-gh release delete-asset v v || gh release create v || true
-gh release upload v v
+gh release delete-asset _ v || gh release create _ || true
+gh release upload _ v
