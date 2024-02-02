@@ -32,18 +32,18 @@ git init
 
 cp -f $DIR/conf/git.config .git/config
 
-echo $VER >v
+mkdir -p _
+echo $VER >_/v
 cd $VER
 
 echo $meta | jq -r '"wget -c "+.assets[].browser_download_url+"&"' | bash
 wait
-cd ..
 
-echo $(pwd)
+cd $DIST
 set +x
 # 不要暴露 s3 地址避免被盗刷
 $DIR/rcp.sh $VER &
-$DIR/rcp.sh v &
+$DIR/rcp.sh _ &
 set -x
 
 wait
