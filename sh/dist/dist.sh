@@ -20,6 +20,8 @@ cd $DIST
 mkdir -p _
 echo $VER >_/v
 
+gh release delete-asset _ v || gh release create _ --notes . || true
+gh release upload _ _/v
 git init
 
 cp -f $DIR/conf/git.config .git/config
@@ -33,6 +35,3 @@ find . -mindepth 1 -maxdepth 1 \
 git add .
 git commit -m$VER
 git push -f --set-upstream origin main
-
-gh release delete-asset _ v || gh release create _ --notes . || true
-gh release upload _ _/v
