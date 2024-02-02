@@ -1,15 +1,14 @@
 v:
   https:
-    - raw.githubusercontent.com/i18n-site/bin/v
-    - atomgit.com/i18n-site/bin/raw/v
-    - cdn.jsdelivr.net/gh/i18n-site/bin@v
+    - raw.githubusercontent.com/i18n-site/bin.dist/master
+    - atomgit.com/i18n-site/bin.dist/raw/master
+    - cdn.jsdelivr.net/gh/i18n-site/bin.dist
     - xxai.eu.org/i18n.site/bin
 
 tar:
   https:
+    - https://github.com/i18n-site/bin/releases/download/v
     # github
-    - github.com/i18n-site/bin/releases/download/${name_ver}
+    - github.com/i18n-site/bin/releases/download/v
     # fastgit
-    - download.fgit.cf/i18n-site/bin/releases/download/${name_ver}
-    # cloudflare
-    - xxai.eu.org/i18n.site/bin
+    - download.fgit.cf/i18n-site/bin/releases/download/v
