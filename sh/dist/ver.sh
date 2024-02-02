@@ -42,8 +42,7 @@ wait
 cd $DIST
 set +x
 # 不要暴露 s3 地址避免被盗刷
-$DIR/rcp.sh $VER &
-$DIR/rcp.sh _ &
+find . -mindepth 1 -maxdepth 1 -exec basename {} \; | grep -v "^\." | xargs -P 4 -I {} ./rcp.sh {}
 set -x
 
 wait
