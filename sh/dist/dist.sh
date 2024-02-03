@@ -7,7 +7,7 @@ set -ex
 
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
 
-VER=$(gh release list -L1 | tail -1 | awk '{print $1}')
+export VER=$(gh release list -L1 | tail -1 | awk '{print $1}')
 
 DIST=${DIR%/*/*}/dist
 DIST_VER=$DIST/$VER
