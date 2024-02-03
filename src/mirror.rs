@@ -1,6 +1,5 @@
-pub const MIRROR: [(bool,&'static str); 9] = [
+pub const MIRROR: [(bool,&'static str); 8] = [
   (false,"codeberg.org/i18n-site/bin.dist/raw/branch/main/"),
-  (false,"raw.gitcode.com/i18n/bin-dist/raw/main/"),
   (false,"huggingface.co/datasets/i18n-site/bin.dist/raw/main/"),
   (false,"bitbucket.org/i18nsite/bin.dist/raw/main/"),
   (false,"gitflic.ru/project/i18n/bindist/blob/raw?file="),
