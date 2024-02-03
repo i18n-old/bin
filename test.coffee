@@ -5,33 +5,25 @@
   @3-/write
   path > join
 
+ROOT = import.meta.dirname
 
-url = 'github.com/i18n-site/bin/releases/download/_/v'
+Y = Yml join ROOT, 'sh'
 
-r = await req 'https://'+url
-console.log r.headers
-console.log await r.text()
+down = (url)=>
+  url = 'https://'+url
+  console.log url
+  await req url
 
-# ROOT = import.meta.dirname
-#
-# {down} = Yml join ROOT, 'sh'
-#
-# # down = (url)=>
-# #   url = 'https://'+url
-# #   console.log url
-# #   r = await req url+'/-/v'
-# #   console.log r
-# #   console.log await r.text()
-# #   return
-#
-#
 # h2_li = []
 # h3_li = []
 #
 #
-# for url from down
-#   console.log url
-#   # await down url
+for url from Y.down
+  r = await down url+'_/v'
+  alt = r.headers.get('alt-svc')
+  if alt
+    console.log alt
+  console.log await r.text()
 #
 # rust = """
 # pub const H2: [&'static str; #{h2_li.length}] = #{JSON.stringify(h2_li)} ;
