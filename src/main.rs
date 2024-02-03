@@ -8,7 +8,7 @@ pub use mirror::MIRROR;
 
 fn main() -> Result<()> {
   dbg!(MIRROR);
-  dbg!(bgu::ver!());
+  // dbg!(bgu::ver!());
 
   let arg_len = std::env::args().count();
   if arg_len == 1 {

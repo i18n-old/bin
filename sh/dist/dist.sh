@@ -34,6 +34,8 @@ find . -mindepth 1 -maxdepth 1 \
   -exec basename {} \; | grep -v "^\." |
   xargs -P 4 -I {} $DIR/rcp.sh {}
 
+$DIR/cf.clean.js
+
 git add .
 git commit -m$VER
 git push -f --set-upstream origin main
