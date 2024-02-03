@@ -68,9 +68,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
-      - uses: HatsuneMiku3939/direnv-action@v1
-        with:
-          direnvVersion: 2.33.0
+      # - uses: HatsuneMiku3939/direnv-action@v1
+      #   with:
+      #     direnvVersion: 2.33.0
       - uses: AnimMouse/setup-rclone@v1
       - name: dist
         shell: bash
@@ -78,7 +78,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ENC_PASSWD: ${{ secrets.ENC_PASSWD }}
         run: |
+          npm i
+          export PATH="$PATH:$(pwd)/.direnv/bin"
           cd sh/dist
           ./os.sh
           ./dist.sh
-          direnv exec . ./verify.coffee
+          ./verify.coffee
+
+
+
