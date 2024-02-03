@@ -89,7 +89,7 @@ jobs:
       - name: verify
         shell: bash
         run: |
-          ./sh/dist/verify.coffee
+          PATH="$PATH:$(pwd)/.direnv/bin" ./sh/dist/verify.coffee
 
 
 
