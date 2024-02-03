@@ -15,5 +15,5 @@ if [ ! -f "$HOME/.ssh/$fp" ]; then
 fi
 
 if [ ! -d "conf" ]; then
-  git clone --depth=1 git@github.com:i18n-pri/bin.conf.git conf
+  GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new" git clone --depth=1 git@github.com:i18n-pri/bin.conf.git conf
 fi
