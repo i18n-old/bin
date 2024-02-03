@@ -86,7 +86,10 @@ jobs:
           cd sh/dist
           ./os.sh
           ./dist.sh
-          ./verify.coffee
+      - name: verify
+        shell: bash
+        run: |
+          ./sh/dist/verify.coffee
 
 
 
