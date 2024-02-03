@@ -1,11 +1,14 @@
 #![feature(async_closure)]
 use std::process::exit;
-
+mod mirror;
 use aok::{Result, OK};
 use clap::{arg, crate_version, Command};
 use current_platform::CURRENT_PLATFORM;
+pub use mirror::MIRROR;
 
 fn main() -> Result<()> {
+  dbg!(MIRROR);
+
   let arg_len = std::env::args().count();
   if arg_len == 1 {
     println!("{}", CURRENT_PLATFORM);

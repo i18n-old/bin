@@ -78,4 +78,5 @@ jobs:
           cd sh/dist
           ./os.sh
           ./dist.sh
-
+          direnv allow
+          direnv exec . ./verify.coffee
