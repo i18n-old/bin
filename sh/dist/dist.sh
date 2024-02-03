@@ -19,7 +19,7 @@ gh release download $VER
 cd $DIST
 mkdir -p _
 
-direnv . exec $DIR/ver_vbyte.coffee _/v
+direnv exec . $DIR/ver_vbyte.coffee _/v
 
 gh release delete-asset _ v || gh release create _ --notes . || true
 # 必须在 git init 之前 upload,不然会没法 release
