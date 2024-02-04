@@ -1,0 +1,31 @@
+name: docker
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - 'sh/cross/docker/*'
+      - '.github/workflows/docker.yml'
+  workflow_dispatch:
+  schedule:
+    # 分钟 小时 日期 月份 星期（0-6）//0代表星期天
+    - cron: '1 1 1 * *'
+
+jobs:
+  build:
+    name: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: build
+        shell: bash
+        env:
+          DOCKER_ORG: ${{ secrets.DOCKER_ORG }}
+          DOCKER_PASSWD: ${{ secrets.DOCKER_PASSWD }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        run: |
+          echo $DOCKER_PASSWD| docker login --username $DOCKER_USER --password-stdin
+          ./sh/cross/docker/build.sh
+          ./sh/cross/docker/push.sh
