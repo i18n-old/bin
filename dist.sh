@@ -61,6 +61,6 @@ if [ "$branch" != "main" ]; then
   git checkout $branch
   git reset --hard $(git log --format=%H -1 main)
   git add .
-  git commit -m $PV || true
+  git commit -m $VER || true
   git push -f
 fi
